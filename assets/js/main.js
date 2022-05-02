@@ -16,12 +16,15 @@ for (const link of links) {
 
 const header = document.querySelector('#header')
 const navHeight = header.offsetHeight
+const backToTopButton = document.querySelector('.back-to-top')
 
 window.addEventListener('scroll', function () {
   if (this.window.scrollY >= navHeight) {
     header.classList.add('scroll')
+    backToTopButton.classList.add('show')
   } else {
     header.classList.remove('scroll')
+    backToTopButton.classList.remove('show')
   }
 })
 
@@ -32,7 +35,13 @@ const swiper = new Swiper('.swiper', {
     el: '.swiper-pagination'
   },
   mousewheel: true,
-  keyboard: true
+  keyboard: true,
+  breakpoints: {
+    767: {
+      slidesPerView: 2,
+      setWrapperSize: true
+    }
+  }
 })
 
 /* SCROLLREVEAL */
@@ -45,11 +54,12 @@ const scrollReveal = ScrollReveal({
 
 scrollReveal.reveal(
   `
-    #home .image, #home .text, 
-    #about .image, #about.text,
-    #services header, #services .card,
-    #testimonials header, #testimonials .testimonials,
-    #contact .text, #contact .links
+  #home .image, #home .text,
+  #about .image, #about .text,
+  #services header, #services .card,
+  #testimonials header, #testimonials .testimonials,
+  #contact .text, #contact .links,
+  footer .brand, footer .social
   `,
   { interval: 100 }
 )
